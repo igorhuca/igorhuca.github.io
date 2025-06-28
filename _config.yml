@@ -1,0 +1,90 @@
+# Site settings
+title: Igor Huca's Blog
+description: >- # this means to ignore newlines until "baseurl:"
+  A growth marketing practitioner sharing insights from years of scaling businesses across MENA and Latin America. 
+  From B2B to B2C, exploring the intersection of data-driven growth and creative strategy.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://igorhuca.github.io" # the base hostname & protocol for your site
+twitter_username: igorhuca
+github_username: igorhuca
+linkedin_username: igorhuca
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Minima theme settings
+minima:
+  skin: auto
+  social_links:
+    twitter: igorhuca
+    github: igorhuca
+    linkedin: igorhuca
+
+# Navigation
+header_pages:
+  - about.md
+  - pt/sobre.md
+
+# Pagination
+paginate: 5
+paginate_path: "/page:num/"
+
+# SEO settings
+google_analytics: # Add your Google Analytics ID here
+lang: en_US
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - package.json
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:year/:month/:day/:title/
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Igor Huca"
+      show_excerpts: true
+      lang: "en"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      lang: "en"
+  - scope:
+      path: "pt"
+    values:
+      lang: "pt"
+  - scope:
+      path: "pt/_posts"
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Igor Huca"
+      show_excerpts: true
+      lang: "pt"
+      permalink: /pt/:categories/:year/:month/:day/:title/

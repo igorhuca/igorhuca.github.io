@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% if page.title %}{{ page.title | escape }} | {{ site.data.locales[page.lang].site.title | default: site.title }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}</title>
+    <meta name="description" content="{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    
+    <!-- Language meta -->
+    <meta http-equiv="content-language" content="{{ page.lang | default: site.default_lang }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}">
+    <meta property="og:description" content="{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    <meta property="og:locale" content="{% if page.lang == 'pt' %}pt_BR{% else %}en_US{% endif %}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ page.url | absolute_url }}">
+    <meta property="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}">
+    <meta property="twitter:description" content="{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    {% if site.twitter_username %}<meta name="twitter:creator" content="@{{ site.twitter_username }}">{% endif %}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+    
+    <!-- Alternate language versions -->
+    {%- for lang in site.languages -%}
+      {%- if lang != page.lang -%}
+        {%- if lang == "en" -%}
+          <link rel="alternate" hreflang="{{ lang }}" href="{{ page.url | remove: '/pt' | remove: '/en' | absolute_url }}">
+        {%- elsif lang == "pt" -%}
+          <link rel="alternate" hreflang="{{ lang }}" href="{{ '/pt' | append: page.url | remove: '/pt' | remove: '/en' | absolute_url }}">
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+    <!-- RSS Feed -->
+    <link type="application/atom+xml" rel="alternate" href="{{ '/feed.xml' | relative_url }}" title="{{ site.data.locales[page.lang].site.title | default: site.title }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+      "name": "{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}",
+      "headline": "{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}",
+      "description": "{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}",
+      "url": "{{ page.url | absolute_url }}",
+      "inLanguage": "{{ page.lang | default: site.default_lang }}",
+      {% if page.layout == 'post' %}
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.date | date_to_xmlschema }}",
+      {% endif %}
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author.name | default: site.title }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.data.locales[page.lang].site.title | default: site.title }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+        }
+      }
+    }
+    </script>
+    
+    {% seo %}
+  </head>
+
+  <body>
+    <header class="site-header" role="banner">
+      <div class="wrapper">
+        {% assign current_lang = page.lang | default: site.default_lang %}
+        
+        {% if current_lang == "pt" %}
+          <a class="site-title" rel="author" href="{{ '/pt/' | relative_url }}">{{ site.title | escape }}</a>
+        {% else %}
+          <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+        {% endif %}
+
+        <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            {% if current_lang == "pt" %}
+              <a class="page-link" href="{{ '/pt/' | relative_url }}">Início</a>
+              <a class="page-link" href="{{ '/pt/sobre/' | relative_url }}">Sobre</a>
+              <a class="page-link" href="{{ '/pt/newsletter/' | relative_url }}">Newsletter</a>
+              
+              <!-- Automated Language switcher for Portuguese pages -->
+              {% if page.url == "/pt/" or page.url == "/pt/index.html" %}
+                <a class="page-link lang-switch" href="{{ '/' | relative_url }}">EN</a>
+              {% elsif page.url == "/pt/sobre/" or page.url == "/pt/sobre/index.html" %}
+                <a class="page-link lang-switch" href="{{ '/about/' | relative_url }}">EN</a>
+              {% elsif page.url == "/pt/newsletter/" or page.url == "/pt/newsletter/index.html" %}
+                <a class="page-link lang-switch" href="{{ '/newsletter/' | relative_url }}">EN</a>
+              {% elsif page.layout == "post" and page.lang == "pt" and page.slug %}
+                {% assign en_post = site.posts | where: "lang", "en" | where: "slug", page.slug | first %}
+                {% if en_post %}
+                  <a class="page-link lang-switch" href="{{ en_post.url | relative_url }}">EN</a>
+                {% else %}
+                  <a class="page-link lang-switch" href="{{ '/' | relative_url }}">EN</a>
+                {% endif %}
+              {% else %}
+                <a class="page-link lang-switch" href="{{ page.url | remove: '/pt' | relative_url }}">EN</a>
+              {% endif %}
+            {% else %}
+              <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
+              <a class="page-link" href="{{ '/about/' | relative_url }}">About</a>
+              <a class="page-link" href="{{ '/newsletter/' | relative_url }}">Newsletter</a>
+              
+              <!-- Automated Language switcher for English pages -->
+              {% if page.url == "/" or page.url == "/index.html" %}
+                <a class="page-link lang-switch" href="{{ '/pt/' | relative_url }}">PT</a>
+              {% elsif page.url == "/about/" or page.url == "/about/index.html" %}
+                <a class="page-link lang-switch" href="{{ '/pt/sobre/' | relative_url }}">PT</a>
+              {% elsif page.url == "/newsletter/" or page.url == "/newsletter/index.html" %}
+                <a class="page-link lang-switch" href="{{ '/pt/newsletter/' | relative_url }}">PT</a>
+              {% elsif page.layout == "post" and page.lang == "en" and page.slug %}
+                {% assign pt_post = site.posts | where: "lang", "pt" | where: "slug", page.slug | first %}
+                {% if pt_post %}
+                  <a class="page-link lang-switch" href="{{ pt_post.url | relative_url }}">PT</a>
+                {% else %}
+                  <a class="page-link lang-switch" href="{{ '/pt/' | relative_url }}">PT</a>
+                {% endif %}
+              {% else %}
+                <a class="page-link lang-switch" href="{{ '/pt' | append: page.url | relative_url }}">PT</a>
+              {% endif %}
+            {% endif %}
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+      <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+      <div class="wrapper">
+        <h2 class="footer-heading">{{ site.title | escape }}</h2>
+
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+              <li class="p-name">
+                {%- if site.author -%}
+                  {{ site.author | escape }}
+                {%- else -%}
+                  {{ site.title | escape }}
+                {%- endif -%}
+              </li>
+              {%- if site.email -%}
+                <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+              {%- endif -%}
+            </ul>
+          </div>
+
+          <div class="footer-col footer-col-2">
+            {%- include social.html -%}
+          </div>
+
+          <div class="footer-col footer-col-3">
+            <p>{{- site.description | escape -}}</p>
+            {% if page.lang == "pt" %}
+              <p><a href="{{ '/pt/newsletter/' | relative_url }}">📧 Assinar Newsletter</a></p>
+            {% else %}
+              <p><a href="{{ '/newsletter/' | relative_url }}">📧 Subscribe to Newsletter</a></p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>

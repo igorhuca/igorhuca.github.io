@@ -1,0 +1,17 @@
+{
+  "name": "igorhuca-blog",
+  "version": "1.0.0",
+  "description": "Igor Huca's personal blog built with Jekyll and hosted on GitHub Pages",
+  "scripts": {
+    "dev": "bundle exec jekyll serve --livereload",
+    "build": "bundle exec jekyll build",
+    "clean": "bundle exec jekyll clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igorhuca/igorhuca.github.io.git"
+  },
+  "keywords": ["jekyll", "blog", "github-pages"],
+  "author": "Igor Huca",
+  "license": "MIT"
+}

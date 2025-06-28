@@ -1,0 +1,86 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Language switcher -->
+  {% include language-switcher.html %}
+  
+  <!-- SEO Meta Tags -->
+  <title>{% if page.title %}{{ page.title | escape }} | {{ site.data.locales[page.lang].site.title | default: site.title }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  
+  <!-- Language meta -->
+  <meta http-equiv="content-language" content="{{ page.lang | default: site.default_lang }}">
+  <html lang="{{ page.lang | default: site.default_lang }}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}">
+  <meta property="og:description" content="{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  <meta property="og:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+  <meta property="og:locale" content="{% if page.lang == 'pt' %}pt_BR{% else %}en_US{% endif %}">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ page.url | absolute_url }}">
+  <meta property="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}">
+  <meta property="twitter:description" content="{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  <meta property="twitter:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+  {% if site.twitter_username %}<meta name="twitter:creator" content="@{{ site.twitter_username }}">{% endif %}
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+  
+  <!-- Alternate language versions -->
+  {%- for lang in site.languages -%}
+    {%- if lang != page.lang -%}
+      {%- if lang == "en" -%}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ page.url | remove: '/pt' | remove: '/en' | absolute_url }}">
+      {%- elsif lang == "pt" -%}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ '/pt' | append: page.url | remove: '/pt' | remove: '/en' | absolute_url }}">
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  
+  <!-- RSS Feed -->
+  <link type="application/atom+xml" rel="alternate" href="{{ '/feed.xml' | relative_url }}" title="{{ site.data.locales[page.lang].site.title | default: site.title }}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+    "name": "{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}",
+    "headline": "{% if page.title %}{{ page.title | escape }}{% else %}{{ site.data.locales[page.lang].site.title | default: site.title | escape }}{% endif %}",
+    "description": "{{ page.excerpt | default: site.data.locales[page.lang].site.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}",
+    "url": "{{ page.url | absolute_url }}",
+    "inLanguage": "{{ page.lang | default: site.default_lang }}",
+    {% if page.layout == 'post' %}
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    {% endif %}
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.author.name | default: site.title }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.data.locales[page.lang].site.title | default: site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+      }
+    }
+  }
+  </script>
+  
+  {% seo %}
+</head>

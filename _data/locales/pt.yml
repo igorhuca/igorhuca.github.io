@@ -1,0 +1,32 @@
+# Portuguese translations
+site:
+  title: "Blog do Igor Huca"
+  description: "Um profissional de growth marketing compartilhando insights de anos escalando negócios no MENA e América Latina."
+
+navigation:
+  home: "Início"
+  about: "Sobre"
+  posts: "Posts"
+
+home:
+  welcome: "Bem-vindo ao meu blog pessoal! Aqui compartilho insights sobre growth marketing, estratégia digital e a interseção entre tecnologia e crescimento de negócios. Sou apaixonado por escalar startups e compartilhar conhecimento prático com a comunidade de growth."
+  recent_posts: "Últimas Publicações"
+  explore_message: "Abaixo você encontrará meus posts mais recentes cobrindo frameworks de growth, insights de marketing e lições aprendidas escalando negócios nos últimos anos. Sinta-se à vontade para explorar e entrar em contato se quiser discutir estratégias de growth, marketing digital ou qualquer outra coisa!"
+
+post:
+  tags: "Tags"
+  categories: "Categorias"
+  comments: "Comentários"
+  comments_placeholder: "Os comentários serão alimentados pelo Giscus em breve!"
+  comments_social: "Enquanto isso, sinta-se à vontade para entrar em contato nas redes sociais para discutir este post."
+  previous: "Anterior"
+  next: "Próximo"
+
+footer:
+  description: "Insights de growth marketing e estratégia digital"
+  follow: "Siga-me"
+
+language:
+  switch_to: "Mudar para"
+  english: "English"
+  portuguese: "Português"

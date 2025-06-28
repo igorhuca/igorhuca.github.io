@@ -1,0 +1,32 @@
+# English translations
+site:
+  title: "Igor Huca's Blog"
+  description: "A growth marketing practitioner sharing insights from years of scaling businesses across MENA and Latin America."
+
+navigation:
+  home: "Home"
+  about: "About"
+  posts: "Posts"
+
+home:
+  welcome: "Welcome to my personal blog! Here I share insights on growth marketing, digital strategy, and the intersection of technology and business growth. I'm passionate about scaling startups and sharing practical knowledge with the growth community."
+  recent_posts: "Recent Posts"
+  explore_message: "Below you'll find my latest posts covering growth frameworks, marketing insights, and lessons learned from scaling businesses over the last years. Feel free to explore and reach out if you'd like to discuss growth strategies, digital marketing, or anything else!"
+
+post:
+  tags: "Tags"
+  categories: "Categories"
+  comments: "Comments"
+  comments_placeholder: "Comments will be powered by Giscus soon!"
+  comments_social: "In the meantime, feel free to reach out on social media to discuss this post."
+  previous: "Previous"
+  next: "Next"
+
+footer:
+  description: "Growth marketing insights and digital strategy"
+  follow: "Follow me"
+
+language:
+  switch_to: "Switch to"
+  english: "English"
+  portuguese: "Português"
